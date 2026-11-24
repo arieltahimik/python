@@ -1,11 +1,31 @@
 # 1. Input functions
 
 def get_number(prompt='Enter a number: '):
-  return float(input(prompt))
+  while True:
+    try:
+      return float(input(prompt))
+    except ValueError:
+      print('Invalid input! Please enter a number.\n')
+
 
 def get_operator():
-  # strip will remove accidental spaces
-  return input('Choose an operation (+, -, *, /): ').strip()
+  while True:
+    operator = input('Enter operator (+, -, *, /): ').strip()
+
+    if operator in ['+', '-', '*', '/']:
+      return operator
+
+    print('Invalid operator! Please choose again.\n')
+
+
+def get_continue():
+  while True:
+    again = input('\nAgain (y/n)? ').strip().lower()
+    if again == 'y':
+      return True
+    if again == 'n':
+      return False
+    print('Invalid input! Please enter y or n.')
 
 
 # 2. Arithmetic functions
@@ -13,19 +33,24 @@ def get_operator():
 def addition(a, b):
   return a + b
 
+
 def subtraction(a, b):
   return a - b
+
 
 def multiplication(a, b):
   return a * b
 
+
 def division(a, b):
-  if b == 0:
+  try:
+    return a / b
+  except ZeroDivisionError:
     return None
-  return a / b
 
 
 # 3. Main function
+
 def main():
   while True:
     first_number = get_number('Enter first number: ')
@@ -38,19 +63,15 @@ def main():
       result = subtraction(first_number, second_number)
     elif operator == '*':
       result = multiplication(first_number, second_number)
-    elif operator == '/':
-      result = division(first_number, second_number)
     else:
-      result = 'Invalid operator!'
+      result = division(first_number, second_number)
 
     if result is None:
       print('Error: Cannot divide by zero!')
     else:
       print(f'Result: {result}')
 
-    again = input('\nAgain (y/n)? ')
-
-    if again.strip().lower() != 'y':
+    if not get_continue():
       break
     print()
 
@@ -58,5 +79,6 @@ def main():
 
 
 # 4. Program entry point
+
 if __name__ == "__main__":
   main()
