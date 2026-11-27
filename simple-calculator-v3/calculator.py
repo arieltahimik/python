@@ -1,6 +1,6 @@
 # 1. Input functions
 
-def get_number(prompt='Enter a number: '):
+def get_number(prompt: str = 'Enter a number: ') -> float:
   while True:
     try:
       return float(input(prompt))
@@ -8,9 +8,9 @@ def get_number(prompt='Enter a number: '):
       print('Invalid input! Please enter a number.\n')
 
 
-def get_operator():
+def get_operator() -> str:
   while True:
-    operator = input('Enter operator (+, -, *, /): ').strip()
+    operator: str = input('Enter operator (+, -, *, /): ').strip()
 
     if operator in ['+', '-', '*', '/']:
       return operator
@@ -18,9 +18,9 @@ def get_operator():
     print('Invalid operator! Please choose again.\n')
 
 
-def get_continue():
+def get_continue() -> bool:
   while True:
-    again = input('\nAgain (y/n)? ').strip().lower()
+    again: str = input('\nAgain (y/n)? ').strip().lower()
     if again == 'y':
       return True
     if again == 'n':
@@ -30,19 +30,19 @@ def get_continue():
 
 # 2. Arithmetic functions
 
-def addition(a, b):
+def addition(a: float, b: float) -> float:
   return a + b
 
 
-def subtraction(a, b):
+def subtraction(a: float, b: float) -> float:
   return a - b
 
 
-def multiplication(a, b):
+def multiplication(a: float, b: float) -> float:
   return a * b
 
 
-def division(a, b):
+def division(a: float, b: float) -> float | None:
   try:
     return a / b
   except ZeroDivisionError:
@@ -51,7 +51,7 @@ def division(a, b):
 
 # 3. Main function
 
-def main():
+def main() -> None:
   while True:
     first_number = get_number('Enter first number: ')
     second_number = get_number('Enter second number: ')
